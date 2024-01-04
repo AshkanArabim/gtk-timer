@@ -1,0 +1,6 @@
+data/com.github.ashkanarabim.gtktimer.desktop.in
+data/com.github.ashkanarabim.gtktimer.metainfo.xml.in
+data/com.github.ashkanarabim.gtktimer.gschema.xml
+src/main.vala
+src/window.vala
+src/window.ui

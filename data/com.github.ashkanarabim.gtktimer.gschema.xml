@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gtk-timer">
+	<schema id="com.github.ashkanarabim.gtktimer" path="/com/github/ashkanarabim/gtktimer/">
+	</schema>
+</schemalist>

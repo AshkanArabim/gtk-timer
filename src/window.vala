@@ -55,8 +55,8 @@ public class Window : Adw.ApplicationWindow {
         start();
     }
     [GtkCallback]
-    private void on_stop_clicked() {
-        stop();
+    private void on_reset_clicked() {
+        reset();
     }
     [GtkCallback]
     private void on_pause_clicked() {
@@ -78,7 +78,7 @@ public class Window : Adw.ApplicationWindow {
             }
 
             if (this.remaining <= 0) {
-                stop();
+                reset();
             }
 
             return this.running;
@@ -87,7 +87,6 @@ public class Window : Adw.ApplicationWindow {
 
     private void stop() {
         this.running = false;
-        reset();
     }
 
     private void pause() {
@@ -103,6 +102,7 @@ public class Window : Adw.ApplicationWindow {
     }
 
     private void reset() {
+        stop();
         this.length = this.original_len;
         update_display(this.original_len);
     }

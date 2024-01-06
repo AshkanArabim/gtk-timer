@@ -35,6 +35,7 @@
                     <child>
 
                       <object class="GtkListBoxRow">
+                        <property name="selectable">False</property>
                         <child>
                           <object class="GtkBox">
                             <property name="homogeneous">true</property>
@@ -54,9 +55,9 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkButton" id="stop_button">
-                                    <property name="label">stop</property>
-                                    <signal name="clicked" handler="on_stop_clicked"/>
+                                  <object class="GtkButton" id="reset_button">
+                                    <property name="label">reset</property>
+                                    <signal name="clicked" handler="on_reset_clicked"/>
                                   </object>
                                 </child>
                                 <child>

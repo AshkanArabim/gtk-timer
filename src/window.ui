@@ -9,7 +9,7 @@
     <style>
       <class name="devel" />
     </style>
-    <property name="content">
+    <child>
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar" id="header_bar">
@@ -25,44 +25,52 @@
         </child>
         <child>
           <object class="GtkBox">
-            <!-- TODO: properties for v centering and spacing -->
             <property name="orientation">vertical</property>
-            <property name="spacing">12</property>
             <property name="valign">center</property>
-            <!-- <property name="margin-start"></property> -->
-            <child>
-              <object class="GtkLabel">
-                <property name="label">00:00:00</property>
-              </object>
-            </child>
             <child>
               <object class="AdwClamp">
                 <property name="maximum_size">380</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="homogeneous">true</property>
-                    <property name="spacing">6</property>
-                    <property name="orientation">horizontal</property>
+                  <object class="GtkListBox">
                     <child>
-                      <object class="GtkButton">
-                        <property name="label">Start</property>
-                        <style>
-                          <class name="suggested-action" />
-                        </style>
+
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <property name="homogeneous">true</property>
+                            <child>
+                              <object class="GtkLabel" id="display">
+                                <property name="halign">start</property>
+                                <property name="label">00:00:00</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="halign">end</property>
+                                <child>
+                                  <object class="GtkButton" id="start_button">
+                                    <property name="label">start</property>
+                                    <signal name="clicked" handler="on_start_clicked"/>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="stop_button">
+                                    <property name="label">stop</property>
+                                    <signal name="clicked" handler="on_stop_clicked"/>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="pause_button">
+                                    <property name="label">pause</property>
+                                    <signal name="clicked" handler="on_pause_clicked"/>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="label">Reset</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="label">Delete</property>
-                        <style>
-                          <class name="destructive-action" />
-                        </style>
-                      </object>
+
                     </child>
                   </object>
                 </child>
@@ -71,7 +79,7 @@
           </object>
         </child>
       </object>
-    </property>
+    </child>
   </template>
   <menu id="primary_menu">
     <section>

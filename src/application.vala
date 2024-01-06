@@ -25,6 +25,7 @@ namespace GtkTimer {
         }
 
         construct {
+            //  ques: what is actionentry?
             ActionEntry[] action_entries = {
                 { "about", this.on_about_action },
                 { "preferences", this.on_preferences_action },
@@ -34,6 +35,7 @@ namespace GtkTimer {
             this.set_accels_for_action ("app.quit", {"<primary>q"});
         }
 
+        // ques: what does activate do?
         public override void activate () {
             base.activate ();
             var win = this.active_window;
@@ -59,6 +61,8 @@ namespace GtkTimer {
         }
 
         private void on_preferences_action () {
+            // ques: what does this do vv
+            // ans: just logs
             message ("app.preferences action activated");
         }
     }

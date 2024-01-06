@@ -19,6 +19,8 @@
  */
 
 int main (string[] args) {
+    //  ques: what is Application?
+    // ans: it's in application.vala
     var app = new GtkTimer.Application ();
     return app.run (args);
 }

@@ -22,89 +22,21 @@ namespace GtkTimer {
 
 [GtkTemplate (ui = "/com/github/ashkanarabim/gtktimer/window.ui")]
 public class Window : Adw.ApplicationWindow {
-    private int original_len = 10 * 60; // 10 mins default
-    private int length = 10 * 60;
-    private int64 target = 0;
-    private int remaining = 0;
-    private bool running = false;
+    private Row[] timers;
 
+    // UI elements from template
     [GtkChild]
-    private unowned Gtk.Label display;
-    //  [GtkChild]
-    //  private unowned Gtk.Button start_button;
-    //  [GtkChild]
-    //  private unowned Gtk.Button stop_button;
-    //  [GtkChild]
-    //  private unowned Gtk.Button pause_button;
+    private unowned Gtk.ListBox timer_list;
 
     public Window (Gtk.Application app) {
         Object (application: app);
-    }
 
-    //  temporarily put all logic here. --------
-    // UI logic ---
-    private void update_display(int s) {
-        int h = s / 3600;
-        int m = (s / 60) % 60; 
-        s = s % 60;
-        display.set_text("%02i:%02i:%02i".printf(h, m, s));
-    }
+        // add hardcoded timer for 10 mins
+        timers += new Row.from_hms(10, 0, 0);
 
-    [GtkCallback]
-    private void on_start_clicked() {
-        start();
-    }
-    [GtkCallback]
-    private void on_reset_clicked() {
-        reset();
-    }
-    [GtkCallback]
-    private void on_pause_clicked() {
-        pause();
-    }
-
-    // button functions ---
-    private void start() { 
-        this.target = new GLib.DateTime.now_local().to_unix() + this.length;
-        this.running = true;
-        int? last_remaining = null;
-        GLib.Timeout.add(100, () => {
-            int64 now = new GLib.DateTime.now_local().to_unix();
-            this.remaining = (int) (this.target - now);
-
-            if (last_remaining == null || last_remaining != this.remaining) {
-                update_display(this.remaining);
-                last_remaining = this.remaining;
-            }
-
-            if (this.remaining <= 0) {
-                reset();
-            }
-
-            return this.running;
-        });
-    }
-
-    private void stop() {
-        this.running = false;
-    }
-
-    private void pause() {
-        // edge case: what if already paused?
-        if (!this.running) {return;}
-        
-        // edge case: what if already past this time?
-        int64 now = new GLib.DateTime.now_local().to_unix();
-        if (this.target <= now) {return;}
-
-        this.running = false;
-        this.length = (int) (target - now);
-    }
-
-    private void reset() {
-        stop();
-        this.length = this.original_len;
-        update_display(this.original_len);
+        for (int i = 0; i < timers.length; i++) {
+            timer_list.append(timers[i]);
+        }
     }
 }
 

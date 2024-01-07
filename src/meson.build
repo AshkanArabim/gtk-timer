@@ -2,6 +2,7 @@ gtk_timer_sources = [
   'main.vala',
   'application.vala',
   'window.vala',
+  'row.vala'
 ]
 
 gtk_timer_deps = [

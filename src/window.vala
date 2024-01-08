@@ -28,6 +28,7 @@ public class Window : Adw.ApplicationWindow {
     [GtkChild]
     private unowned Gtk.ListBox timer_list;
 
+    // constructors
     public Window (Gtk.Application app) {
         Object (application: app);
 
@@ -38,6 +39,16 @@ public class Window : Adw.ApplicationWindow {
             timer_list.append(timers[i]);
         }
     }
+
+    // internal logic
+    [GtkCallback]
+    public void open_new_timer_dialog() {
+        //  ques: how??
+        // TODO: ^^
+        var new_window = new NewTimerDialog();
+        new_window.present();
+    }
+
 }
 
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <requires lib="Adw" version="1.0" />
+  <template class="GtkTimerNewTimerDialog" parent="AdwApplicationWindow">
+    <property name="title">New Timer</property>
+    <child>
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"></object>
+        </child>
+        <child>
+          <object class="AdwClamp">
+            <!-- TODO: add small margin all around -->
+            <!-- <property name="margin">10</property> -->
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">10</property>
+            <property name="margin_start">10</property>
+            <property name="margin_end">10</property>
+            <property name="maximum_size">200</property>
+            <child>
+              <object class="AdwClamp">
+                <property name="orientation">vertical</property>
+                <property name="maximum_size">120</property>
+
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">15</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="halign">center</property>
+                        <property name="spacing">10</property>
+                        <child>
+                          <object class="GtkSpinButton">
+                            <property name="orientation">vertical</property>
+                            <property name="numeric">true</property>
+                            <property name="value">500</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">:</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSpinButton">
+                            <property name="orientation">vertical</property>
+                            <property name="numeric">true</property>
+                            <property name="value">1</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">:</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSpinButton">
+                            <property name="orientation">vertical</property>
+                            <property name="numeric">true</property>
+                            <property name="value">1</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <!-- TODO: add name input -->
+                      <object class="GtkEntry">
+                        <property name="placeholder_text">Timer name...</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

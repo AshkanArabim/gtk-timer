@@ -13,6 +13,12 @@
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar" id="header_bar">
+            <child type="start">
+              <object class="GtkButton">
+                <property name="icon_name">list-add-symbolic</property>
+                <signal name="clicked" handler="open_new_timer_dialog"/>
+              </object>
+            </child>
             <child type="end">
               <object class="GtkMenuButton">
                 <property name="primary">True</property>

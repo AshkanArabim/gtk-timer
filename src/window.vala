@@ -35,6 +35,7 @@ public class Window : Adw.ApplicationWindow {
         // add hardcoded timer for 10 mins
         timers += new Row.from_hms(10, 0, 0);
 
+        // add timers
         for (int i = 0; i < timers.length; i++) {
             timer_list.append(timers[i]);
         }
@@ -42,13 +43,28 @@ public class Window : Adw.ApplicationWindow {
 
     // internal logic
     [GtkCallback]
-    public void open_new_timer_dialog() {
-        //  ques: how??
-        // TODO: ^^
+    public void open_new_timer_dialog () {
         var new_window = new NewTimerDialog();
+        new_window.done.connect(add_new_timer);
         new_window.present();
     }
 
+    //  public void update_UI () {
+    //      // TODO: finish this
+
+    //      // remove all children
+    //      // ques: how?
+
+    //      // append children
+    //      for (int i = 0; i < timers.length; i++) {
+    //          timer_list.append(timers[i]);
+    //      }
+    //  }
+
+    public void add_new_timer (Row r) {
+        this.timers += r;
+        this.timer_list.append(r);
+    }
 }
 
 }

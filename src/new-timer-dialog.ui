@@ -2,10 +2,28 @@
 <interface>
   <requires lib="gtk" version="4.0" />
   <requires lib="Adw" version="1.0" />
+  <object class="GtkAdjustment" id="adj_hours">
+    <property name="upper">59</property>
+    <!-- <property name="lower">0</property> -->
+    <property name="step_increment">5</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adj_minutes">
+    <property name="upper">59</property>
+    <property name="lower">0</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adj_seconds">
+    <property name="upper">59</property>
+    <property name="lower">0</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
   <template class="GtkTimerNewTimerDialog" parent="AdwWindow">
     <property name="modal">True</property>
     <!-- ques: the hell is this? vv -->
-    <property name="destroy_with_parent">True</property>
+    <!-- <property name="destroy_with_parent">True</property> -->
     <property name="title">New Timer</property>
     <child>
       <object class="AdwToolbarView">
@@ -16,11 +34,14 @@
             <child>
               <object class="GtkButton">
                 <property name="label">Cancel</property>
+                <signal name="clicked" handler="on_cancel_clicked"/>
               </object>
             </child>
             <child type="end">
-              <object class="GtkButton">
+              <object class="GtkButton" id="add_btn">
                 <property name="label">Add</property>
+                <property name="sensitive">False</property>
+                <signal name="clicked" handler="on_submit_clicked"/>
                 <style>
                   <class name="suggested-action"/>
                 </style>
@@ -51,10 +72,11 @@
                         <property name="halign">center</property>
                         <property name="spacing">10</property>
                         <child>
-                          <object class="GtkSpinButton">
+                          <object class="GtkSpinButton" id="h_spinbutton">
                             <property name="orientation">vertical</property>
-                            <property name="numeric">true</property>
-                            <property name="value">500</property>
+                            <property name="adjustment">adj_hours</property>
+                            <!-- <property name="numeric">true</property> -->
+                            <!-- <property name="value">500</property> -->
                           </object>
                         </child>
                         <child>
@@ -63,10 +85,11 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkSpinButton">
+                          <object class="GtkSpinButton" id="m_spinbutton">
                             <property name="orientation">vertical</property>
-                            <property name="numeric">true</property>
-                            <property name="value">1</property>
+                            <property name="adjustment">adj_minutes</property>
+                            <!-- <property name="numeric">true</property> -->
+                            <!-- <property name="value">1</property> -->
                           </object>
                         </child>
                         <child>
@@ -75,17 +98,18 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkSpinButton">
+                          <object class="GtkSpinButton" id="s_spinbutton">
                             <property name="orientation">vertical</property>
-                            <property name="numeric">true</property>
-                            <property name="value">1</property>
+                            <property name="adjustment">adj_seconds</property>
+                            <!-- <property name="numeric">true</property> -->
+                            <!-- <property name="value">1</property> -->
                           </object>
                         </child>
                       </object>
                     </child>
                     <child>
                       <!-- TODO: add name input -->
-                      <object class="GtkEntry">
+                      <object class="GtkEntry" id="name_entry">
                         <property name="placeholder_text">Timer name...</property>
                       </object>
                     </child>

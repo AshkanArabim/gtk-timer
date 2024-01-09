@@ -7,8 +7,7 @@ public class Row : Gtk.ListBoxRow{
     private int length;
     private int64 target = 0;
     private int remaining = 0;
-    //  TODO: replace this with enum-based states (running, paused, stopped)
-    //  private bool running = false;
+    private string timer_name = "";
     private enum states {
         RUNNING,
         PAUSED,
@@ -16,8 +15,6 @@ public class Row : Gtk.ListBoxRow{
     }
     private int state = states.STOPPED;
 
-    [GtkChild]
-    private unowned Gtk.Label display;
     //  [GtkChild]
     //  private unowned Gtk.Button start_button;
     //  [GtkChild]
@@ -25,19 +22,30 @@ public class Row : Gtk.ListBoxRow{
     //  [GtkChild]
     //  private unowned Gtk.Button pause_button;
     [GtkChild]
+    private unowned Gtk.Label display;
+    [GtkChild]
     private unowned Gtk.Stack start_pause_stack;
     [GtkChild]
     private unowned Gtk.Stack reset_stack;
+    [GtkChild]
+    private unowned Gtk.Label name_label;
 
-    public Row (int s) {
+    public Row (int s, string name = "") {
         this.original_len = s;
         this.length = s;
-        update_display(s);
-        update_buttons();
+        this.update_display(s);
+        this.set_timer_name(name);
+        this.update_buttons();
     }
 
-    public Row.from_hms (int h, int m, int s) {
-        this(h * 3600 + m * 60 + s);
+    public Row.from_hms (int h, int m, int s, string name = "") {
+        this(h * 3600 + m * 60 + s, name);
+    }
+
+    public void set_timer_name (string name) {
+        this.timer_name = name;
+        this.name_label.set_text(name);
+        this.name_label.visible = (name.length > 0);
     }
 
     // UI logic

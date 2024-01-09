@@ -33,7 +33,7 @@ public class Window : Adw.ApplicationWindow {
         Object (application: app);
 
         // add hardcoded timer for 10 mins
-        timers += new Row.from_hms(10, 0, 0);
+        timers += new Row.from_hms(10, 0, 0, "default timer");
 
         // add timers
         for (int i = 0; i < timers.length; i++) {

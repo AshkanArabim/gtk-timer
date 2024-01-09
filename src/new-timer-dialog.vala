@@ -21,7 +21,6 @@ public class NewTimerDialog : Adw.Window{
 
     // constructors
     public NewTimerDialog() {
-        // FIXME: vv
         this.h_spinbutton.input.connect(() => parse_hours ());
         this.m_spinbutton.input.connect(() => parse_minutes ());
         this.s_spinbutton.input.connect(() => parse_seconds ());
@@ -54,9 +53,9 @@ public class NewTimerDialog : Adw.Window{
 
     private void check_tiemr_validity() {
         // DEBUG: vv
-        message("hours: %d".printf(this.hours));
-        message("minutes: %d".printf(this.minutes));
-        message("seconds: %d".printf(this.seconds));
+        //  message("hours: %d".printf(this.hours));
+        //  message("minutes: %d".printf(this.minutes));
+        //  message("seconds: %d".printf(this.seconds));
         if (
             this.hours != 0 ||
             this.minutes != 0 ||
@@ -79,7 +78,8 @@ public class NewTimerDialog : Adw.Window{
         Row newtimer = new Row.from_hms (
             this.hours,
             this.minutes,
-            this.seconds
+            this.seconds,
+            this.name_entry.buffer.text
         );
         done (newtimer);
         this.close();

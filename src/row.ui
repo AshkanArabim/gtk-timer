@@ -8,131 +8,95 @@
     <property name="selectable">False</property>
     <child>
       <object class="GtkBox">
-        <property name="homogeneous">true</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel" id="display">
+          <object class="GtkLabel" id="name_label">
+            <!-- empty unless explicitly has name -->
+            <property name="visible">False</property>
+            <property name="margin_top">10</property>
             <property name="margin_start">10</property>
+            <property name="margin_end">10</property>
             <property name="halign">start</property>
-            <property name="label">00:00:00</property>
+            <property name="label"></property>
           </object>
         </child>
-        <!-- vv cmt: old system -->
-        <!-- <child>
-          <object class="GtkBox">
-            <property name="spacing">10</property>
-            <property name="halign">end</property>
-            <property name="margin_top">10</property>
-            <property name="margin_bottom">10</property>
-            <property name="margin_end">10</property>
-            <child>
-              <object class="GtkButton" id="start_button">
-                <property name="label">start</property>
-                <signal name="clicked" handler="on_start_clicked"/>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="reset_button">
-                <property name="label">reset</property>
-                <signal name="clicked" handler="on_reset_clicked"/>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="pause_button">
-                <property name="label">pause</property>
-                <signal name="clicked" handler="on_pause_clicked"/>
-              </object>
-            </child>
-          </object>
-        </child> -->
-        <!-- vv cmt: new system -->
         <child>
           <object class="GtkBox">
-            <property name="spacing">10</property>
-            <property name="halign">end</property>
-            <property name="margin_top">10</property>
-            <property name="margin_bottom">10</property>
-            <property name="margin_end">10</property>
+            <property name="homogeneous">true</property>
             <child>
-              <object class="GtkStack" id="reset_stack">
-                <child>
-                  <object class="GtkStackPage">
-                    <property name="name">show_reset_stack</property>
-                    <property name="child">
-                      <object class="GtkButton" id="reset_button">
-                        <property name="icon_name">view-refresh-symbolic</property>
-                        <signal name="clicked" handler="on_reset_clicked" />
-                      </object>
-                    </property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkStackPage">
-                    <property name="name">hide_reset_stack</property>
-                    <property name="child">
-                      <!-- just to fill it up -->
-                      <object class="GtkLabel"></object>
-                    </property>
-                  </object>
-                </child>
+              <object class="GtkLabel" id="display">
+                <property name="margin_start">10</property>
+                <property name="halign">start</property>
+                <property name="label">00:00:00</property>
               </object>
             </child>
             <child>
-              <object class="GtkStack" id="start_pause_stack">
+              <object class="GtkBox">
+                <property name="spacing">10</property>
+                <property name="halign">end</property>
+                <property name="margin_top">10</property>
+                <property name="margin_bottom">10</property>
+                <property name="margin_end">10</property>
                 <child>
-                  <object class="GtkStackPage">
-                    <property name="name">start_stackpage</property>
-                    <property name="child">
-                      <object class="GtkButton" id="start_button">
-                        <property name="icon_name">media-playback-start-symbolic</property>
-                        <signal name="clicked" handler="on_start_clicked" />
+                  <object class="GtkStack" id="reset_stack">
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">show_reset_stack</property>
+                        <property name="child">
+                          <object class="GtkButton" id="reset_button">
+                            <property name="icon_name">view-refresh-symbolic</property>
+                            <signal name="clicked" handler="on_reset_clicked" />
+                          </object>
+                        </property>
                       </object>
-                    </property>
+                    </child>
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">hide_reset_stack</property>
+                        <property name="child">
+                          <!-- just to fill it up -->
+                          <object class="GtkLabel"></object>
+                        </property>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkStackPage">
-                    <property name="name">pause_stackpage</property>
-                    <property name="child">
-                      <object class="GtkButton">
-                        <property name="icon_name">media-playback-pause-symbolic</property>
-                        <signal name="clicked" handler="on_pause_clicked" />
+                  <object class="GtkStack" id="start_pause_stack">
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">start_stackpage</property>
+                        <property name="child">
+                          <object class="GtkButton" id="start_button">
+                            <property name="icon_name">media-playback-start-symbolic</property>
+                            <signal name="clicked" handler="on_start_clicked" />
+                          </object>
+                        </property>
                       </object>
-                    </property>
+                    </child>
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">pause_stackpage</property>
+                        <property name="child">
+                          <object class="GtkButton">
+                            <property name="icon_name">media-playback-pause-symbolic</property>
+                            <signal name="clicked" handler="on_pause_clicked" />
+                          </object>
+                        </property>
+                      </object>
+                    </child>
                   </object>
                 </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="delete_button">
-                <property name="icon_name">user-trash-symbolic</property>
-                <signal name="clicked" handler="on_delete_clicked" />
+                <child>
+                  <object class="GtkButton" id="delete_button">
+                    <property name="icon_name">user-trash-symbolic</property>
+                    <signal name="clicked" handler="on_delete_clicked" />
+                  </object>
+                </child>
               </object>
             </child>
           </object>
         </child>
-        <!-- vv cmt: TEMPORARY vv -->
-        <!-- <child>
-          <object class="GtkStack">
-            <child>
-              <object class="GtkStackPage">
-                <property name="child">
-                  <object class="GtkLabel">
-                    <property name="label">child1</property>
-                  </object>
-                </property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkStackPage">
-                <property name="child">
-                  <object class="GtkLabel">
-                    <property name="label">child2</property>
-                  </object>
-                </property >
-              </object>
-            </child>
-          </object>
-        </child> -->
       </object>
     </child>
   </template>

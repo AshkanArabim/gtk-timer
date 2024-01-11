@@ -75,7 +75,7 @@ public class NewTimerDialog : Adw.Window{
     [GtkCallback]
     private void on_submit_clicked () {
         // guaranteed that valid timer can be made
-        Row newtimer = new Row.from_hms (
+        Timer newtimer = new Timer.from_hms (
             this.hours,
             this.minutes,
             this.seconds,
@@ -86,7 +86,7 @@ public class NewTimerDialog : Adw.Window{
     }
 
     // signals
-    public signal void done (Row r);
+    public signal void done (Timer r);
 }
 
 }

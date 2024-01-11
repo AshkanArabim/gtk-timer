@@ -1,7 +1,7 @@
 namespace GtkTimer {
 
-[GtkTemplate (ui = "/com/github/ashkanarabim/gtktimer/row.ui")]
-public class Row : Gtk.ListBoxRow{
+[GtkTemplate (ui = "/com/github/ashkanarabim/gtktimer/timer.ui")]
+public class Timer : Gtk.ListBoxRow{
     // states
     private int original_len; // 10 mins default
     private int length;
@@ -14,6 +14,7 @@ public class Row : Gtk.ListBoxRow{
         STOPPED
     }
     private int state = states.STOPPED;
+    public int index = -1;
 
     //  [GtkChild]
     //  private unowned Gtk.Button start_button;
@@ -30,7 +31,7 @@ public class Row : Gtk.ListBoxRow{
     [GtkChild]
     private unowned Gtk.Label name_label;
 
-    public Row (int s, string name = "") {
+    public Timer (int s, string name = "") {
         this.original_len = s;
         this.length = s;
         this.update_display(s);
@@ -38,7 +39,7 @@ public class Row : Gtk.ListBoxRow{
         this.update_buttons();
     }
 
-    public Row.from_hms (int h, int m, int s, string name = "") {
+    public Timer.from_hms (int h, int m, int s, string name = "") {
         this(h * 3600 + m * 60 + s, name);
     }
 
@@ -71,20 +72,19 @@ public class Row : Gtk.ListBoxRow{
 
     [GtkCallback]
     private void on_start_clicked() {
-        start();
+        this.start();
     }
     [GtkCallback]
     private void on_reset_clicked() {
-        reset();
+        this.reset();
     }
     [GtkCallback]
     private void on_pause_clicked() {
-        pause();
+        this.pause();
     }
     [GtkCallback]
     private void on_delete_clicked() {
-        //  TODO: handle delete
-        return;
+        this.@delete();
     }
 
     // internal logic
@@ -133,6 +133,13 @@ public class Row : Gtk.ListBoxRow{
         this.length = this.original_len;
         update_display(this.original_len);
     }
+
+    private void @delete() {
+        this.deleted(this.index);
+    }
+
+    // signals
+    public signal void deleted(int idx);
 }
 
 }

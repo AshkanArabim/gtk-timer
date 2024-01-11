@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk" version="4.0" />
   <requires lib="Adw" version="1.0" />
-  <template class="GtkTimerRow" parent="GtkListBoxRow">
+  <template class="GtkTimerTimer" parent="GtkListBoxRow">
     <!-- ques: what goes in parent? -->
     <!-- ans: what you INHERIT FROM -->
     <property name="selectable">False</property>

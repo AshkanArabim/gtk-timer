@@ -2,7 +2,7 @@
 <gresources>
   <gresource prefix="/com/github/ashkanarabim/gtktimer">
     <file preprocess="xml-stripblanks">window.ui</file>
-    <file preprocess="xml-stripblanks">row.ui</file>
+    <file preprocess="xml-stripblanks">timer.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
     <file preprocess="xml-stripblanks">new-timer-dialog.ui</file>
   </gresource>

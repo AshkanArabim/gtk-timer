@@ -72,11 +72,9 @@ public class Window : Adw.ApplicationWindow {
 
     //  note: the whole delete operation can be re-written to not use indices
     public void delete_timer (int idx) {
-        message("I wanna delete %d".printf(idx)); // DEBUG
         timer_UI_list.remove(timers[idx]);
         timers.remove_at(idx);
         //  timers.remove(timers[idx]); // worked!
-        message("I have %d timers".printf(timers.size)); // DEBUG
         redraw_timers();
         reindex_timers(idx);
     }

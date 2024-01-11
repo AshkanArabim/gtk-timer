@@ -54,8 +54,10 @@
                       <object class="GtkStackPage">
                         <property name="name">hide_reset_stack</property>
                         <property name="child">
-                          <!-- just to fill it up -->
-                          <object class="GtkLabel"></object>
+                          <object class="GtkButton">
+                            <property name="icon_name">document-edit-symbolic</property>
+                            <signal name="clicked" handler="on_edit_clicked"/>
+                          </object>
                         </property>
                       </object>
                     </child>

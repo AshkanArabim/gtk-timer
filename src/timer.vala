@@ -49,6 +49,15 @@ public class Timer : Gtk.ListBoxRow{
         this.name_label.visible = (name.length > 0);
     }
 
+    // getters / setters
+    public int get_length_seconds () {
+        return this.original_len;
+    }
+
+    public string get_timer_name() {
+        return this.timer_name;
+    }
+
     // UI logic
     private void update_display (int s) {
         int h = s / 3600;
@@ -85,6 +94,10 @@ public class Timer : Gtk.ListBoxRow{
     [GtkCallback]
     private void on_delete_clicked() {
         this.@delete();
+    }
+    [GtkCallback]
+    private void on_edit_clicked() {
+        this.edit();
     }
 
     // internal logic
@@ -140,6 +153,7 @@ public class Timer : Gtk.ListBoxRow{
 
     // signals
     public signal void deleted(int idx);
+    public signal void edit();
 }
 
 }

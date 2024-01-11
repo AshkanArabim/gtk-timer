@@ -50,11 +50,21 @@ public class Window : Adw.ApplicationWindow {
         new_window.present();
     }
 
-    public void add_timer (Timer r) {
-        r.deleted.connect((idx) => delete_timer(idx));
-        r.index = timers.size;
-        this.timers.add(r);
-        this.timer_UI_list.append(r);
+    public void open_edit_timer_dialog (Timer old_timer) {
+        var edit_window = new NewTimerDialog.edit(old_timer);
+        edit_window.done.connect((new_timer) => {
+            this.delete_timer(old_timer.index);
+            this.add_timer(new_timer);
+        });
+        edit_window.present();
+    }
+
+    public void add_timer (Timer t) {
+        t.deleted.connect((idx) => this.delete_timer(idx));
+        t.edit.connect(() => this.open_edit_timer_dialog(t));
+        t.index = timers.size;
+        this.timers.add(t);
+        this.timer_UI_list.append(t);
     }
 
     public void redraw_timers() {

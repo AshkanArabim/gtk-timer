@@ -127,7 +127,12 @@ public class Item : Gtk.ListBoxRow{
             this.target_hms = "--:--:--";
             return;
         }
-        this.target_hms = dt.format("hh:mm:ss");
+        //  this.target_hms = dt.format("hh:mm:ss");
+        this.target_hms = "%02i:%02i:%02i".printf(
+            dt.get_hour(),
+            dt.get_minute(),
+            dt.get_second()
+        );
     }
 
     public void start() { 

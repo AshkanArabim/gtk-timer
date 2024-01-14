@@ -19,7 +19,7 @@ public class Standalone : Adw.NavigationPage {
     public string target_hms {get; set; default = "??";}
     public string remaining_hms {get; set; default = "??";}
     private int _state;
-    private int state {
+    public int state {
         get {
             return this._state;
         }

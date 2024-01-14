@@ -78,7 +78,7 @@
               <object class="GtkBox">
                 <child>
                   <object class="GtkLabel">
-                    <property name="label">Ends at:</property>
+                    <property name="label">Ends at: </property>
                   </object>
                 </child>
                 <child>

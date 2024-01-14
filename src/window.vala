@@ -18,25 +18,32 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-namespace GtkTimer {
+namespace Timer {
 
 [GtkTemplate (ui = "/com/github/ashkanarabim/gtktimer/window.ui")]
 public class Window : Adw.ApplicationWindow {
-    //  private Timer[] timers;
-    private Gee.ArrayList<Timer> timers = new Gee.ArrayList<Timer>();
+    //  private Item[] timers;
+    private Gee.ArrayList<Item> timers = new Gee.ArrayList<Item>();
 
     // UI elements from template
     [GtkChild]
     private unowned Gtk.ListBox timer_UI_list;
+    [GtkChild]
+    private unowned Standalone timer_standalone;
 
     // constructors
     public Window (Gtk.Application app) {
         Object (application: app);
 
         // remove after adding GSettings support vv
-        Timer default_timer = new Timer.from_hms(10, 0, 0, "default timer");
+        Item default_timer = new Item.from_hms(10, 0, 0, "default timer");
         add_timer(default_timer);
+        this.timer_standalone.item = default_timer;
         // remove after adding GSettings support ^^
+
+        // DEBUG
+        //  Standalone s = new Standalone();
+        //  message ("standalone was created.");
 
         // add timers
         redraw_timers();
@@ -50,7 +57,7 @@ public class Window : Adw.ApplicationWindow {
         new_window.present();
     }
 
-    public void open_edit_timer_dialog (Timer old_timer) {
+    public void open_edit_timer_dialog (Item old_timer) {
         var edit_window = new NewTimerDialog.edit(old_timer);
         edit_window.done.connect((new_timer) => {
             this.delete_timer(old_timer.index);
@@ -59,7 +66,7 @@ public class Window : Adw.ApplicationWindow {
         edit_window.present();
     }
 
-    public void add_timer (Timer t) {
+    public void add_timer (Item t) {
         t.deleted.connect((idx) => this.delete_timer(idx));
         t.edit.connect(() => this.open_edit_timer_dialog(t));
         t.index = timers.size;

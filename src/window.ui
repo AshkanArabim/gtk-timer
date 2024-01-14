@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk" version="4.0" />
   <requires lib="Adw" version="1.0" />
-  <template class="GtkTimerWindow" parent="AdwApplicationWindow">
+  <template class="TimerWindow" parent="AdwApplicationWindow">
     <property name="title">Timer</property>
     <property name="default-width">600</property>
     <property name="default-height">300</property>
@@ -10,38 +10,52 @@
       <class name="devel" />
     </style>
     <child>
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar" id="header_bar">
-            <child type="start">
-              <object class="GtkButton">
-                <property name="icon_name">list-add-symbolic</property>
-                <signal name="clicked" handler="open_new_timer_dialog"/>
-              </object>
-            </child>
-            <child type="end">
-              <object class="GtkMenuButton">
-                <property name="primary">True</property>
-                <property name="icon-name">open-menu-symbolic</property>
-                <property name="tooltip-text" translatable="yes">Menu</property>
-                <property name="menu-model">primary_menu</property>
+      <object class="AdwNavigationView">
+        <child>
+          <object class="AdwNavigationPage" id="main_page">
+            <property name="title">Timer</property>
+            <property name="can_pop">False</property>
+            <child>
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar" id="header_bar">
+                    <child type="start">
+                      <object class="GtkButton">
+                        <property name="icon_name">list-add-symbolic</property>
+                        <signal name="clicked" handler="open_new_timer_dialog"/>
+                      </object>
+                    </child>
+                    <child type="end">
+                      <object class="GtkMenuButton">
+                        <property name="primary">True</property>
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Menu</property>
+                        <property name="menu-model">primary_menu</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="AdwClamp">
+                        <property name="maximum_size">380</property>
+                        <child>
+                          <object class="GtkListBox" id="timer_UI_list" ></object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
         </child>
         <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="valign">center</property>
-            <child>
-              <object class="AdwClamp">
-                <property name="maximum_size">380</property>
-                <child>
-                  <object class="GtkListBox" id="timer_UI_list"></object>
-                </child>
-              </object>
-            </child>
-          </object>
+          <!-- vv is of type AdwNavigationPage -->
+          <object class="TimerStandalone" id="timer_standalone"/>
         </child>
       </object>
     </child>

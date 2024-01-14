@@ -1,4 +1,4 @@
-namespace GtkTimer{
+namespace Timer{
 
 [GtkTemplate (ui="/com/github/ashkanarabim/gtktimer/new-timer-dialog.ui")]
 public class NewTimerDialog : Adw.Window{
@@ -26,7 +26,7 @@ public class NewTimerDialog : Adw.Window{
         this.s_spinbutton.input.connect(() => this.parse_seconds ());
     }
 
-    public NewTimerDialog.edit (Timer t) {
+    public NewTimerDialog.edit (Item t) {
         this();
         this.title = "Edit Timer";
         this.add_btn.label = "Save";
@@ -98,7 +98,7 @@ public class NewTimerDialog : Adw.Window{
     [GtkCallback]
     private void on_submit_clicked () {
         // guaranteed that valid timer can be made
-        Timer newtimer = new Timer.from_hms (
+        Item newtimer = new Item.from_hms (
             this.hours,
             this.minutes,
             this.seconds,
@@ -109,7 +109,7 @@ public class NewTimerDialog : Adw.Window{
     }
 
     // signals
-    public signal void done (Timer r);
+    public signal void done (Item r);
 }
 
 }

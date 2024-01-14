@@ -1,19 +1,21 @@
-namespace GtkTimer {
+namespace Timer {
 
-[GtkTemplate (ui = "/com/github/ashkanarabim/gtktimer/timer.ui")]
-public class Timer : Gtk.ListBoxRow{
+[GtkTemplate (ui = "/com/github/ashkanarabim/gtktimer/item.ui")]
+public class Item : Gtk.ListBoxRow{
     // states
-    private int original_len; // 10 mins default
-    private int length;
-    private int64 target = 0;
-    private int remaining = 0;
-    private string timer_name = "";
-    private enum states {
+    public int original_len; // 10 mins default
+    public int length;
+    public string timer_name = "";
+    public int64 target = 0;
+    public int remaining = 0;
+    public string remaining_hms = "";
+    public string target_hms = "--:--:--";
+    public enum states {
         RUNNING,
         PAUSED,
         STOPPED
     }
-    private int state = states.STOPPED;
+    public int state = states.STOPPED;
     public int index = -1;
 
     //  [GtkChild]
@@ -31,7 +33,7 @@ public class Timer : Gtk.ListBoxRow{
     [GtkChild]
     private unowned Gtk.Label name_label;
 
-    public Timer (int s, string name = "") {
+    public Item (int s, string name = "") {
         this.original_len = s;
         this.length = s;
         this.update_display(s);
@@ -39,7 +41,7 @@ public class Timer : Gtk.ListBoxRow{
         this.update_buttons();
     }
 
-    public Timer.from_hms (int h, int m, int s, string name = "") {
+    public Item.from_hms (int h, int m, int s, string name = "") {
         this(h * 3600 + m * 60 + s, name);
     }
 
@@ -60,10 +62,8 @@ public class Timer : Gtk.ListBoxRow{
 
     // UI logic
     private void update_display (int s) {
-        int h = s / 3600;
-        int m = (s / 60) % 60; 
-        s = s % 60;
-        display.set_text("%02i:%02i:%02i".printf(h, m, s));
+        this.update_remaining_hms(s);
+        display.set_text(this.remaining_hms);
     }
 
     private void update_buttons() {
@@ -101,8 +101,26 @@ public class Timer : Gtk.ListBoxRow{
     }
 
     // internal logic
-    private void start() { 
-        this.target = new GLib.DateTime.now_local().to_unix() + this.length;
+    public void update_remaining_hms(int seconds) {
+        int h = seconds / 3600;
+        int m = (seconds / 60) % 60; 
+        int s = seconds % 60;
+        this.remaining_hms = "%02i:%02i:%02i".printf(h, m, s);
+    }
+
+    public void update_target_hms(GLib.DateTime? dt = null) {
+        if (dt == null) {
+            this.target_hms = "--:--:--";
+            return;
+        }
+        this.target_hms = dt.format("hh:mm:ss");
+    }
+
+    public void start() { 
+        GLib.DateTime dt = new GLib.DateTime.now_local();
+        this.target = dt.to_unix() + this.length;
+        update_target_hms(dt);
+
         this.state = states.RUNNING;
         int? last_remaining = null;
         this.update_buttons();
@@ -123,12 +141,7 @@ public class Timer : Gtk.ListBoxRow{
         });
     }
 
-    private void stop() {
-        this.state = states.STOPPED;
-        this.update_buttons();
-    }
-
-    private void pause() {
+    public void pause() {
         // edge case: what if already paused?
         if (this.state != states.RUNNING) {return;}
         
@@ -136,15 +149,18 @@ public class Timer : Gtk.ListBoxRow{
         int64 now = new GLib.DateTime.now_local().to_unix();
         if (this.target <= now) {return;}
 
+        this.update_target_hms();
         this.state = states.PAUSED;
         this.length = (int) (target - now);
         this.update_buttons();
     }
 
-    private void reset() {
-        stop();
+    public void reset() {
+        this.update_target_hms();
         this.length = this.original_len;
         update_display(this.original_len);
+        this.state = states.STOPPED;
+        this.update_buttons();
     }
 
     private void @delete() {

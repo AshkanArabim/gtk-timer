@@ -20,7 +20,7 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <template class="GtkTimerNewTimerDialog" parent="AdwWindow">
+  <template class="TimerNewTimerDialog" parent="AdwWindow">
     <property name="modal">True</property>
     <!-- ques: the hell is this? vv -->
     <!-- <property name="destroy_with_parent">True</property> -->

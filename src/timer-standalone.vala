@@ -37,9 +37,9 @@ public class Standalone : Adw.NavigationPage {
     public Standalone() {
         // the reason these can be here is that binds isn't null. 
         // it's initialized and has a source (item) from XML
-        this.binds.bind("remaining_hms", this, "remaining_hms", GLib.BindingFlags.DEFAULT);
-        this.binds.bind("target_hms", this, "target_hms", GLib.BindingFlags.DEFAULT);
-        this.binds.bind("state", this, "state", GLib.BindingFlags.DEFAULT);
+        this.binds.bind("remaining_hms", this, "remaining_hms", GLib.BindingFlags.SYNC_CREATE);
+        this.binds.bind("target_hms", this, "target_hms", GLib.BindingFlags.SYNC_CREATE);
+        this.binds.bind("state", this, "state", GLib.BindingFlags.SYNC_CREATE);
     }
 
     private void update_buttons () {
@@ -56,17 +56,17 @@ public class Standalone : Adw.NavigationPage {
     [GtkCallback]
     private void on_start_clicked () {
         //  when the state changes buttons are updated automatically
-        this.state = Item.states.RUNNING;
+        //  this.state = Item.states.RUNNING;
         this.item.start();
     }
     [GtkCallback]
     private void on_pause_clicked () {
-        this.state = Item.states.PAUSED;
+        //  this.state = Item.states.PAUSED;
         this.item.pause();
     }
     [GtkCallback]
     private void on_reset_clicked () {
-        this.state = Item.states.STOPPED;
+        //  this.state = Item.states.STOPPED;
         this.item.reset();
     }
 }

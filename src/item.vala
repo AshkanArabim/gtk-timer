@@ -99,6 +99,10 @@ public class Item : Gtk.ListBoxRow{
     private void on_edit_clicked() {
         this.edit();
     }
+    [GtkCallback]
+    private void on_fullscreen_clicked() {
+        this.show_standalone();
+    }
 
     // internal logic
     public void update_remaining_hms(int seconds) {
@@ -170,6 +174,7 @@ public class Item : Gtk.ListBoxRow{
     // signals
     public signal void deleted(int idx);
     public signal void edit();
+    public signal void show_standalone();
 }
 
 }

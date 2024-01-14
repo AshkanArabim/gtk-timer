@@ -11,7 +11,7 @@
         <child>
           <object class="GtkLabel" id="display">
             <!-- <property name="label">00:00:00</property> -->
-            <property name="label" bind-source="TimerStandalone" bind-property="target_hms" bind-flags="default"/>
+            <property name="label" bind-source="TimerStandalone" bind-property="remaining_hms" bind-flags="sync-create"/>
           </object>
         </child>
         <child type="bottom">
@@ -84,7 +84,7 @@
                 <child>
                   <object class="GtkLabel" id="ui_end_time">
                     <!-- <property name="label"></property> -->
-                    <property name="label" bind-source="TimerStandalone" bind-property="target_hms" bind-flags="default"/>
+                    <property name="label" bind-source="TimerStandalone" bind-property="target_hms" bind-flags="sync-create"/>
                   </object>
                 </child>
               </object>
@@ -96,6 +96,6 @@
     </child>
   </template>
   <object class="GBindingGroup" id="binds">
-    <property name="source" bind-source="TimerStandalone" bind-property="item" bind-flags="default"/>
+    <property name="source" bind-source="TimerStandalone" bind-property="item" bind-flags="sync-create"/>
   </object>
 </interface>

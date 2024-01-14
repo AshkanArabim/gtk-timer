@@ -95,6 +95,12 @@
                     <signal name="clicked" handler="on_delete_clicked" />
                   </object>
                 </child>
+                <child>
+                  <object class="GtkButton" id="fullscreen_button">
+                    <property name="icon_name">view-fullscreen-symbolic</property>
+                    <signal name="clicked" handler="on_fullscreen_clicked"/>"
+                  </object>
+                </child>
               </object>
             </child>
           </object>

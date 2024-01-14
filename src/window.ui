@@ -10,7 +10,7 @@
       <class name="devel" />
     </style>
     <child>
-      <object class="AdwNavigationView">
+      <object class="AdwNavigationView" id="nav_view">
         <child>
           <object class="AdwNavigationPage" id="main_page">
             <property name="title">Timer</property>

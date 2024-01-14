@@ -29,6 +29,8 @@ public class Window : Adw.ApplicationWindow {
     [GtkChild]
     private unowned Gtk.ListBox timer_UI_list;
     [GtkChild]
+    private unowned Adw.NavigationView nav_view;
+    [GtkChild]
     private unowned Standalone timer_standalone;
 
     // constructors
@@ -38,7 +40,7 @@ public class Window : Adw.ApplicationWindow {
         // remove after adding GSettings support vv
         Item default_timer = new Item.from_hms(10, 0, 0, "default timer");
         add_timer(default_timer);
-        this.timer_standalone.item = default_timer;
+        //  this.timer_standalone.item = default_timer;
         // remove after adding GSettings support ^^
 
         // DEBUG
@@ -66,9 +68,15 @@ public class Window : Adw.ApplicationWindow {
         edit_window.present();
     }
 
+    public void open_standalone(Item t) {
+        this.timer_standalone.item = t;
+        this.nav_view.push(this.timer_standalone);
+    }
+
     public void add_timer (Item t) {
         t.deleted.connect((idx) => this.delete_timer(idx));
         t.edit.connect(() => this.open_edit_timer_dialog(t));
+        t.show_standalone.connect(this.open_standalone);
         t.index = timers.size;
         this.timers.add(t);
         this.timer_UI_list.append(t);

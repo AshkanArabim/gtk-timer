@@ -5,17 +5,27 @@ public class Item : Gtk.ListBoxRow{
     // states
     public int original_len; // 10 mins default
     public int length;
-    public string timer_name = "";
+    private string _timer_name = "";
+    public string timer_name {
+        get{
+            return this._timer_name;
+        } 
+        set {
+            this._timer_name = value;
+            this.name_label.set_text(value);
+            this.name_label.visible = (value.length > 0);
+        }
+    }
     public int64 target = 0;
     public int remaining = 0;
-    public string remaining_hms = "";
-    public string target_hms = "--:--:--";
+    public string remaining_hms {get; set; default = "--:--:--";}
+    public string target_hms {get; set; default = "--:--:--";}
     public enum states {
         RUNNING,
         PAUSED,
         STOPPED
     }
-    public int state = states.STOPPED;
+    public int state {get; set; default = states.STOPPED;}
     public int index = -1;
 
     //  [GtkChild]
@@ -37,7 +47,7 @@ public class Item : Gtk.ListBoxRow{
         this.original_len = s;
         this.length = s;
         this.update_display(s);
-        this.set_timer_name(name);
+        this.name = name;
         this.update_buttons();
     }
 
@@ -45,20 +55,20 @@ public class Item : Gtk.ListBoxRow{
         this(h * 3600 + m * 60 + s, name);
     }
 
-    public void set_timer_name (string name) {
-        this.timer_name = name;
-        this.name_label.set_text(name);
-        this.name_label.visible = (name.length > 0);
-    }
+    //  public void set_timer_name (string name) {
+    //      this.timer_name = name;
+    //      this.name_label.set_text(name);
+    //      this.name_label.visible = (name.length > 0);
+    //  }
 
     // getters / setters
     public int get_length_seconds () {
         return this.original_len;
     }
 
-    public string get_timer_name() {
-        return this.timer_name;
-    }
+    //  public string get_timer_name() {
+    //      return this.timer_name;
+    //  }
 
     // UI logic
     private void update_display (int s) {

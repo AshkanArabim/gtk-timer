@@ -37,7 +37,7 @@ public class NewTimerDialog : Adw.Window{
         this.parse_hours(h);
         this.parse_minutes(m);
         this.parse_seconds(s);
-        this.name_entry.set_text(t.get_timer_name());
+        this.name_entry.set_text(t.timer_name);
     }
 
     // logic

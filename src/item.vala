@@ -36,16 +36,16 @@ public class Item : Gtk.ListBoxRow{
     [GtkChild]
     private unowned Gtk.Label name_label;
 
-    public Item (int s, string name = "") {
+    public Item (int s, string timer_name = "") {
         this.original_len = s;
         this.length = s;
         this.update_display(s);
-        this.name = name;
+        this.timer_name = timer_name;
         this.update_buttons();
     }
 
-    public Item.from_hms (int h, int m, int s, string name = "") {
-        this(h * 3600 + m * 60 + s, name);
+    public Item.from_hms (int h, int m, int s, string timer_name = "") {
+        this(h * 3600 + m * 60 + s, timer_name);
     }
 
     // getters / setters
@@ -118,10 +118,11 @@ public class Item : Gtk.ListBoxRow{
         );
     }
 
-    public void start() { 
+    public void start() {
         GLib.DateTime dt = new GLib.DateTime.now_local();
         this.target = dt.to_unix() + this.length;
-        update_target_hms(dt);
+        GLib.DateTime dt_target = new GLib.DateTime.from_unix_local(this.target);
+        update_target_hms(dt_target);
 
         this.state = states.RUNNING;
         int? last_remaining = null;

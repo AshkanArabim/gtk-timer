@@ -7,7 +7,9 @@
     <child>
       <object class="AdwToolbarView">
         <!-- cmt: not sure if I'd need this vv -->
-        <!-- <child type="top"></child>  -->
+        <child type="top">
+          <object class="AdwHeaderBar"></object>
+        </child> 
         <child>
           <object class="GtkLabel" id="display">
             <!-- <property name="label">00:00:00</property> -->
@@ -44,7 +46,7 @@
                       <object class="GtkBox">
                         <child>
                           <object class="GtkButton">
-                            <property name="label">Play</property>
+                            <property name="label">Resume</property>
                             <signal name="clicked" handler="on_start_clicked" />
                           </object>
                         </child>
@@ -82,7 +84,7 @@
                 </child>
               </object>
             </child>
-            <!-- ques: WHY THE FUCK ISN'T THIS WORKING? vv -->
+            <!-- ques: WHY ISN'T THIS WORKING? vv -->
             <!-- <child type="end"> -->
             <child>
               <!-- <packing>

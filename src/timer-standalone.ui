@@ -18,22 +18,32 @@
           </object>
         </child>
         <child type="bottom">
-          <object class="GtkBox">
-            <property name="halign">end</property>
-            <property name="spacing">10</property>
+          <object class="GtkCenterBox">
+            <property name="margin_start">10</property>
+            <property name="margin_end">10</property>
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">10</property>
+            <!-- <property name="spacing">10</property> -->
             <!-- <property name="orientation">vertical</property> -->
-            <child>
+            <child type="start">
               <!-- stack to host the play + pause button -->
               <object class="GtkStack" id="button_stack">
-                <property name="halign">center</property>
+                <property name="hexpand">False</property>
                 <child>
                   <object class="GtkStackPage" id="stopped_stack">
                     <!-- stopped stack -->
                     <property name="name">stopped_stack</property>
                     <property name="child">
-                      <object class="GtkButton">
-                        <property name="label">Start</property>
-                        <signal name="clicked" handler="on_start_clicked" />
+                      <object class="GtkBox">
+                        <child>
+                          <object class="GtkButton">
+                            <property name="label">Start</property>
+                            <style>
+                              <class name="suggested-action"/>
+                            </style>
+                            <signal name="clicked" handler="on_start_clicked" />
+                          </object>
+                        </child>
                       </object>
                     </property>
                   </object>
@@ -44,6 +54,7 @@
                     <property name="name">paused_stack</property>
                     <property name="child">
                       <object class="GtkBox">
+                        <property name="spacing">10</property>
                         <child>
                           <object class="GtkButton">
                             <property name="label">Resume</property>
@@ -53,6 +64,9 @@
                         <child>
                           <object class="GtkButton">
                             <property name="label">Reset</property>
+                            <style>
+                              <class name="destructive-action"/>
+                            </style>
                             <signal name="clicked" handler="on_reset_clicked" />
                           </object>
                         </child>
@@ -66,6 +80,7 @@
                     <property name="name">running_stack</property>
                     <property name="child">
                       <object class="GtkBox">
+                        <property name="spacing">10</property>
                         <child>
                           <object class="GtkButton">
                             <property name="label">Pause</property>
@@ -76,6 +91,9 @@
                           <object class="GtkButton">
                             <property name="label">Reset</property>
                             <signal name="clicked" handler="on_reset_clicked" />
+                            <style>
+                              <class name="destructive-action"/>
+                            </style>
                           </object>
                         </child>
                       </object>
@@ -86,11 +104,12 @@
             </child>
             <!-- ques: WHY ISN'T THIS WORKING? vv -->
             <!-- <child type="end"> -->
-            <child>
+            <child type="end">
               <!-- <packing>
                 <property name="position">1</property>
               </packing> -->
               <object class="GtkBox">
+                <property name="margin_end">10</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="label">Ends at: </property>

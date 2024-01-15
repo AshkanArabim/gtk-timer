@@ -15,6 +15,9 @@
             <!-- <property name="label">00:00:00</property> -->
             <property name="label" bind-source="TimerStandalone" bind-property="remaining_hms"
               bind-flags="sync-create" />
+            <style>
+              <class name="standalone-remaining"/>
+            </style>
           </object>
         </child>
         <child type="bottom">

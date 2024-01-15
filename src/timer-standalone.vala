@@ -37,7 +37,7 @@ public class Standalone : Adw.NavigationPage {
 
     private void update_buttons () {
         if (this.state == Item.states.RUNNING) {
-            this.button_stack.visible_child_name = "playing_stack";
+            this.button_stack.visible_child_name = "running_stack";
         } else if (this.state == Item.states.PAUSED) {
             this.button_stack.visible_child_name = "paused_stack";
         } else { // assume stopped

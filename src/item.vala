@@ -27,13 +27,6 @@ public class Item : Gtk.ListBoxRow{
     }
     public int state {get; set; default = states.STOPPED;}
     public int index = -1;
-
-    //  [GtkChild]
-    //  private unowned Gtk.Button start_button;
-    //  [GtkChild]
-    //  private unowned Gtk.Button stop_button;
-    //  [GtkChild]
-    //  private unowned Gtk.Button pause_button;
     [GtkChild]
     private unowned Gtk.Label display;
     [GtkChild]
@@ -55,20 +48,10 @@ public class Item : Gtk.ListBoxRow{
         this(h * 3600 + m * 60 + s, name);
     }
 
-    //  public void set_timer_name (string name) {
-    //      this.timer_name = name;
-    //      this.name_label.set_text(name);
-    //      this.name_label.visible = (name.length > 0);
-    //  }
-
     // getters / setters
     public int get_length_seconds () {
         return this.original_len;
     }
-
-    //  public string get_timer_name() {
-    //      return this.timer_name;
-    //  }
 
     // UI logic
     private void update_display (int s) {

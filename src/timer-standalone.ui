@@ -95,7 +95,7 @@
       </object>
     </child>
   </template>
-  <!-- <object class="GBindingGroup" id="binds">
+  <object class="GBindingGroup" id="binds">
     <property name="source" bind-source="TimerStandalone" bind-property="item" bind-flags="sync-create"/>
-  </object> -->
+  </object>
 </interface>

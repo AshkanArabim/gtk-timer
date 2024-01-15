@@ -47,11 +47,6 @@ public class NewTimerDialog : Adw.Window{
         }
         this.h_spinbutton.value = int.parse(this.h_spinbutton.get_text());
         this.hours = (int) this.h_spinbutton.value;
-        //  message("hours updated");
-        //  message("h_spinbutton other value: %d".printf((int) this.h_spinbutton.value));
-        //  message("h_spinbutton text: %s".printf(this.h_spinbutton.get_text()));
-        //  message("h_spinbutton get chars: %s".printf(this.h_spinbutton.get_chars()));
-        //  message("hours: %s".printf(this.hours.to_string()));
         check_tiemr_validity();
         return 0;
     }
@@ -75,10 +70,6 @@ public class NewTimerDialog : Adw.Window{
     }
 
     private void check_tiemr_validity() {
-        // DEBUG: vv
-        //  message("hours: %d".printf(this.hours));
-        //  message("minutes: %d".printf(this.minutes));
-        //  message("seconds: %d".printf(this.seconds));
         if (
             this.hours != 0 ||
             this.minutes != 0 ||
